@@ -27,4 +27,4 @@ services:
       context: devana-leaderboard
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8085:80
