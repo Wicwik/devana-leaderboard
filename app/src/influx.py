@@ -20,7 +20,8 @@ def get_users_and_hours():
    query = 'from(bucket:"devana-leaderboard")\
    |> range(start: -10m)\
    |> filter(fn:(r) => r._measurement == "gpu")\
-   |> filter(fn:(r) => r._field == "used_hour")\
+   |> filter(fn:(r) => r._field == "used_hour")\' \
+   |> filter(fn:(r) => r.host == "devana-leaderboard-telegraf")\
    |> last()'
 
    result = query_api.query(org=org, query=query)
