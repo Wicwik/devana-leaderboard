@@ -12,7 +12,7 @@ services:
       - ./influxdb/config:/etc/influxdb2
 
   telegraf:
-    image: telegraf:1.34.0-alpine
+    image: telegraf:1.34.0
     depends_on:
       - influxdb
     volumes:
