@@ -18,6 +18,7 @@ services:
       context: telegraf
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /root/.ssh:/etc/telegraf/.ssh
     env_file:
       - ~/.influxdb
     restart: unless-stopped
