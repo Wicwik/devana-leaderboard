@@ -18,8 +18,8 @@ services:
       context: telegraf
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-      - /root/.ssh/config:/etc/ssh/ssh_config.d/devana.conf
-      - /root/.ssh/id_rsa:/etc/telegraf/.ssh/id_rsa
+      - /root/.ssh/config:/etc/ssh/ssh_config.d/devana.conf:ro
+      - /root/.ssh/id_rsa:/etc/telegraf/id_rsa:ro
     env_file:
       - ~/.influxdb
     restart: unless-stopped
