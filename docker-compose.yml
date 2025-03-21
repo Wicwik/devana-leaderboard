@@ -28,6 +28,8 @@ services:
       - influxdb
     build:
       context: app
+    env_file:
+      - ~/.influxdb
     restart: unless-stopped
     ports:
       - 8085:80

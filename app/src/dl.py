@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 from fastapi.responses import HTMLResponse
+from .influx import get_users_and_hours
 
 app = FastAPI()
 
@@ -18,15 +19,9 @@ class UserGPUTime(BaseModel):
     user: str
     gpu_time: int
 
-leaderboard = [
-    {"user": "Alice", "gpu_time": 120},
-    {"user": "Bob", "gpu_time": 95},
-    {"user": "Charlie", "gpu_time": 80}
-]
-
 @app.get("/leaderboard", response_model=List[UserGPUTime])
 def get_leaderboard():
-    return leaderboard
+    return get_users_and_hours()
 
 html_content = """
 <!DOCTYPE html>
