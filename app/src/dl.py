@@ -21,7 +21,7 @@ class UserGPUTime(BaseModel):
 
 @app.get("/leaderboard", response_model=List[UserGPUTime])
 def get_leaderboard():
-    return sorted(get_users_and_hours(), lambda x: x["gpu_time"], reverse=True)
+    return sorted(get_users_and_hours(), key=lambda x: x["gpu_time"], reverse=True)
 
 html_content = """
 <!DOCTYPE html>
