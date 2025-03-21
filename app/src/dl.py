@@ -66,6 +66,10 @@ html_content = """
         tr:hover {
             background-color: #f1f1f1;
         }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
     </style>
     <script>
         async function fetchLeaderboard() {
@@ -95,6 +99,9 @@ html_content = """
         <tbody id=\"leaderboard-body\">
         </tbody>
     </table>
+    <footer>
+       <a href="https://github.com/Wicwik/devana-leaderboard" target="_blank">GitHub</a>
+    </footer>
 </body>
 </html>
 """
