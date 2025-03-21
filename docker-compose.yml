@@ -12,19 +12,21 @@ services:
       - ./influxdb/config:/etc/influxdb2
 
   telegraf:
-    image: telegraf:1.34.0
     depends_on:
       - influxdb
+    build:
+      context: telegraf
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     env_file:
       - ~/.influxdb
+    restart: unless-stopped
     
-  devana-leaderboard:
+  app:
     depends_on:
       - influxdb
     build:
-      context: devana-leaderboard
+      context: app
     restart: unless-stopped
     ports:
       - 8085:80
