@@ -26,10 +26,10 @@ def get_leaderboard():
 
 html_content = """
 <!DOCTYPE html>
-<html lang=\"en\">
+<html lang="en">
 <head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devana Leaderboard</title>
     <style>
         body {
@@ -63,6 +63,7 @@ html_content = """
         th {
             background-color: #007BFF;
             color: white;
+            cursor: pointer;
         }
         tr:hover {
             background-color: #f1f1f1;
@@ -72,6 +73,10 @@ html_content = """
         async function fetchLeaderboard() {
             const response = await fetch('/leaderboard');
             const data = await response.json();
+            populateTable(data);
+        }
+
+        function populateTable(data) {
             const tableBody = document.getElementById('leaderboard-body');
             tableBody.innerHTML = '';
             data.forEach(entry => {
@@ -80,6 +85,27 @@ html_content = """
                 tableBody.appendChild(row);
             });
         }
+
+        function sortTable(columnIndex, isNumeric = false) {
+            const table = document.querySelector("table");
+            const tbody = document.getElementById("leaderboard-body");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            const sortedRows = rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
+                
+                if (isNumeric) {
+                    return parseFloat(aValue) - parseFloat(bValue);
+                } else {
+                    return aValue.localeCompare(bValue);
+                }
+            });
+
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+
         setInterval(fetchLeaderboard, 5000);
         window.onload = fetchLeaderboard;
     </script>
@@ -89,11 +115,11 @@ html_content = """
     <table>
         <thead>
             <tr>
-                <th>User</th>
-                <th>GPU Time Used</th>
+                <th onclick="sortTable(0, false)">User</th>
+                <th onclick="sortTable(1, true)">GPU Time Used</th>
             </tr>
         </thead>
-        <tbody id=\"leaderboard-body\">
+        <tbody id="leaderboard-body">
         </tbody>
     </table>
 </body>
