@@ -19,7 +19,6 @@ services:
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - /root/.ssh/config:/etc/ssh/ssh_config.d/devana.conf:ro
-      - /root/.ssh/id_rsa:/etc/telegraf/id_rsa:ro
       - /root/.ssh:/etc/telegraf/.ssh
     env_file:
       - ~/.influxdb
