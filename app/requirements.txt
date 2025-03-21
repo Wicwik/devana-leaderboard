@@ -1,2 +1,3 @@
 fastapi[standard]==0.115.11
+influxdb_client==1.48.0
 pydantic==2.10.6
